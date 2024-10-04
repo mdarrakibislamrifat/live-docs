@@ -1,3 +1,4 @@
+"use server";
 import { nanoid } from "nanoid";
 import { liveblocks } from "../liveblocks";
 import { revalidatePath } from "next/cache";
@@ -24,7 +25,9 @@ export const createDocument = async ({
       usersAccesses,
       defaultAccesses: [],
     });
-    revalidatePath("/");
+
+    await revalidatePath("/");
+
     return parseStringify(room);
   } catch (error) {
     console.log(`Error happened while creating a room: ${error}`);
